@@ -16,6 +16,9 @@ spec:
             name: main-app-svc
             port:
               number: 5000
+  - host: "news.k4s.io"
+    http:
+      paths:
       - pathType: Prefix
         path: "/news"
         backend:
