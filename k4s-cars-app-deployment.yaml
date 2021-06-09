@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cars-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cars-app
+  template:
+    metadata:
+      labels:
+        app: cars-app
+    spec:
+      containers:
+      - name: cars-app
+        imagePullPolicy: Always
+        image: k4sartifacts.azurecr.io/cars:v1
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cars-app-svc
+spec:
+  selector:
+    app: cars-app
+  type: ClusterIP
+  ports:
+  - name: http
+    protocol: TCP
+    port: 5003
+    targetPort: 80

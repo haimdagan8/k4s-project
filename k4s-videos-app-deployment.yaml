@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: videos-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: videos-app
+  template:
+    metadata:
+      labels:
+        app: videos-app
+    spec:
+      containers:
+      - name: videos-app
+        imagePullPolicy: Always
+        image: k4sartifacts.azurecr.io/videos:v1
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: videos-app-svc
+spec:
+  selector:
+    app: videos-app
+  type: ClusterIP
+  ports:
+  - name: http
+    protocol: TCP
+    port: 5004
+    targetPort: 80
