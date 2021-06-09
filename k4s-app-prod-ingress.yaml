@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: "k4s.io"
+  - host: "k4s.io/*"
     http:
       paths:
       - pathType: Prefix
@@ -16,11 +16,8 @@ spec:
             name: main-app-svc
             port:
               number: 5000
-  - host: "news.k4s.io"
-    http:
-      paths:
       - pathType: Prefix
-        path: /
+        path: "/news"
         backend:
           service:
             name: news-app-svc
