@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k4s-argocd-ingress-prod
+  namespace: argocd
+  annotations:
+    cert-manager.io/issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+      - "argocd.k4s.io"
+    secretName: k4s-argocd-tls
+  rules:
+  - host: "argocd.k4s.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 443
