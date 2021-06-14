@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: videos-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: videos-app
