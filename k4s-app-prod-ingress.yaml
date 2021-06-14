@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: k4s-ingress-prod
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/issuer: letsencrypt
 spec:
   tls:
   - hosts:
