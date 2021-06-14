@@ -4,7 +4,8 @@ metadata:
   name: k4s-ingress-prod
 spec:
   rules:
-  - host: "k4s.io"
+  - host: "k4s.io
+    secretName: k4s-ssl
     http:
       paths:
       - pathType: Prefix
@@ -22,6 +23,7 @@ spec:
             port:
               number: 5001
   - host: "food.k4s.io"
+    secretName: food-k4s-ssl
     http:
       paths:
       - pathType: Prefix
@@ -32,6 +34,7 @@ spec:
             port:
               number: 5002
   - host: "cars.k4s.io"
+    secretName: cars-k4s-ssl
     http:
       paths:
       - pathType: Prefix
@@ -42,6 +45,7 @@ spec:
             port:
               number: 5003
   - host: "videos.k4s.io"
+    secretName: videos-k4s-ssl
     http:
       paths:
       - pathType: Prefix
