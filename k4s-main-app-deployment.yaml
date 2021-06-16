@@ -16,6 +16,9 @@ spec:
       - name: main-app
         imagePullPolicy: Always
         image: k4sartifacts.azurecr.io/main:v1
+        envFrom:
+        - secretRef:
+            name: account-secret
 ---
 kind: Service
 apiVersion: v1
