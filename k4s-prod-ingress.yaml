@@ -1,0 +1,62 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k4s-ingress-prod
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+      - "k4s.io"
+      - "food.k4s.io"
+      - "cars.k4s.io"
+      - "videos.k4s.io"
+    secretName: k4s-tls
+  rules:
+  - host: "k4s.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: main-app-svc
+            port:
+              number: 5000
+      - pathType: Prefix
+        path: "/news"
+        backend:
+          service:
+            name: news-app-svc
+            port:
+              number: 5001
+  - host: "food.k4s.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: food-app-svc
+            port:
+              number: 5002
+  - host: "cars.k4s.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: cars-app-svc
+            port:
+              number: 5003
+  - host: "videos.k4s.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: videos-app-svc
+            port:
+              number: 5004
